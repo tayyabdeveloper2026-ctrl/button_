@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Modern Button</title>
+
+<style>
+/* ===== Professional Color Theme ===== */
+:root {
+    --bg: #0b0f14;
+    --surface: #111820;
+    --border: #28333d;
+    --white: #f8fafc;
+    --muted: #94a3b8;
+    --green: #10b981;
+    --green-dark: #059669;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(ellipse at top, #172a29 0%, transparent 55%),
+        var(--bg);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color: var(--white);
+}
+
+/* ===== Premium Card ===== */
+.card {
+    width: 100%;
+    max-width: 430px;
+    padding: 48px 30px;
+    text-align: center;
+    background: rgba(17, 24, 32, 0.92);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+    animation: appear 0.7s ease both;
+}
+
+.icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #285849;
+    border-radius: 18px;
+    background: #102a23;
+    color: #34d399;
+    font-size: 27px;
+}
+
+h1 {
+    font-size: clamp(24px, 5vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+}
+
+p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== Modern Button ===== */
+.button {
+    position: relative;
+    width: 100%;
+    min-height: 54px;
+    margin-top: 30px;
+    padding: 15px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    background: var(--green);
+    color: #04130e;
+    border: 1px solid #34d399;
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(16, 185, 129, 0.12);
+    transition: background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.button:hover {
+    background: #34d399;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.23);
+}
+
+.button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.button:focus-visible {
+    outline: 3px solid #a7f3d0;
+    outline-offset: 4px;
+}
+
+.button:disabled {
+    cursor: wait;
+    opacity: 0.8;
+    transform: none;
+}
+
+/* Arrow movement */
+.arrow {
+    display: inline-block;
+    font-size: 19px;
+    transition: transform 0.25s ease;
+}
+
+.button:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* Loading spinner */
+.spinner {
+    width: 17px;
+    height: 17px;
+    border: 2px solid rgba(4, 19, 14, 0.25);
+    border-top-color: #04130e;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+/* Secondary button */
+.secondary {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid #34414d;
+    border-radius: 12px;
+    color: #dbe4ec;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.secondary:hover {
+    background: #1a2530;
+    border-color: #64748b;
+}
+
+.status {
+    min-height: 25px;
+    margin-top: 22px;
+    font-size: 13px;
+    color: #34d399;
+}
+
+/* Animations */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 36px 22px;
+        border-radius: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+    <div class="icon">✦</div>
+
+    <h1>Welcome Back</h1>
+
+    <p>
+        Experience a clean, modern interface
+        with premium colors and smooth interactions.
+    </p>
+
+    <button class="button" id="startBtn" type="button">
+        <span id="btnText">Get Started</span>
+        <span class="arrow" id="arrow">→</span>
+    </button>
+
+    <button class="secondary" id="resetBtn" type="button">
+        Reset Button
+    </button>
+
+    <p class="status" id="status" aria-live="polite">
+        Ready when you are.
+    </p>
+
+</main>
+
+<script>
+// Get HTML elements
+const startBtn = document.getElementById("startBtn");
+const btnText = document.getElementById("btnText");
+const arrow = document.getElementById("arrow");
+const status = document.getElementById("status");
+const resetBtn = document.getElementById("resetBtn");
+
+let loading = false;
+let timer;
+
+// Main button click
+startBtn.addEventListener("click", () => {
+    if (loading) return;
+
+    loading = true;
+    startBtn.disabled = true;
+
+    btnText.textContent = "Please wait...";
+    arrow.replaceWith(createSpinner());
+    status.textContent = "Processing your request...";
+
+    // Demo loading effect
+    timer = setTimeout(() => {
+        loading = false;
+        startBtn.disabled = false;
+
+        btnText.textContent = "Success!";
+        document.querySelector(".spinner")?.remove();
+
+        const newArrow = document.createElement("span");
+        newArrow.className = "arrow";
+        newArrow.id = "arrow";
+        newArrow.textContent = "✓";
+        startBtn.appendChild(newArrow);
+
+        status.textContent = "Action completed successfully.";
+    }, 1200);
+});
+
+// Create loading spinner
+function createSpinner() {
+    const spinner = document.createElement("span");
+    spinner.className = "spinner";
+    spinner.setAttribute("aria-hidden", "true");
+    return spinner;
+}
+
+// Reset to original state
+resetBtn.addEventListener("click", () => {
+    clearTimeout(timer);
+    loading = false;
+    startBtn.disabled = false;
+
+    document.querySelector(".spinner")?.remove();
+
+    btnText.textContent = "Get Started";
+
+    const existingArrow = document.getElementById("arrow");
+    if (!existingArrow) {
+        const newArrow = document.createElement("span");
+        newArrow.className = "arrow";
+        newArrow.id = "arrow";
+        newArrow.textContent = "→";
+        startBtn.appendChild(newArrow);
+    } else {
+        existingArrow.textContent = "→";
+    }
+
+    status.textContent = "Button reset successfully.";
+});
+</script>
+
+</body>
+</html>
